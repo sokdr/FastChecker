@@ -1,7 +1,7 @@
 # FastChecker
 Bash script to identify fast the security level of networks and web applications against well known vulnerabilities.
 
-With the usage of the Nmap script engine, hping3, sslscan tool and wafw00f the script performs the following:
+With the usage of the Nmap script engine, hping3, sslscan tool and wafw00f the script performs the following checks:
 
 •	Check for Poodle vulnerability
 •	Check for Heartbleed vulnerability
@@ -19,6 +19,7 @@ With the usage of the Nmap script engine, hping3, sslscan tool and wafw00f the s
 •	Check DNS Server BIND version Directive Remote Version Disclosure
 •	Check DNS Transfer Zone
 •	WAF detection
+
 
 
 #References:
