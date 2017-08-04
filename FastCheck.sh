@@ -127,7 +127,7 @@ do
 		read -p "Do you want to check DNS Transfer Zone $dnszone [yn]" answer 	#Check if you want to perform DNS transfer zone yes or no
 		if [[ $answer = y ]];
 			then	
-				dig axfr $dns $record
+				dig axfr $record $dns 
 		fi
 		echo
 			;;
