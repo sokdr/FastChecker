@@ -10,7 +10,7 @@ echo "With waf00f pls use FQDN for better resutls:"
 echo "Also the script makes use of hping3 and sslscan tools:"
 echo "####################################################################################"
 echo
-echo "Dear ##$HOSTNAME## Welcome to the Fast VUlnerability Checker v1.0.0:"
+echo "Dear ##$HOSTNAME## Welcome to the Fast Vulnerability Checker Script v1.0.0:"
 echo "======================================================="
 echo "I provide you with your public IP address:"
 curl -s http://checkip.dyndns.org/ | grep -o "[[:digit:].]\+"
