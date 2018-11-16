@@ -31,7 +31,7 @@ echo
 echo "Here is the list of vulnerabilities and checks you want to search:"
 echo 
 PS3='Please enter your choice: '
-options=("Poodle check" "Heartbleed check" "SSL/TLS check" "ftp-anon" "Shellshock check" "Slowloris check" "HTTP-Methods" "TCP timestamp" "WebServer Information" "Strict-Transport-Security" "Banner grabbing" "DNS Server Check-List" "WAF detection" "Quit")
+options=("Poodle check" "Heartbleed check" "SSL/TLS check" "ftp-anon" "Shellshock check" "Slowloris check" "HTTP-Methods" "TCP timestamp" "WebServer Information" "Strict-Transport-Security" "Banner grabbing" "WAF detection" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -111,26 +111,6 @@ do
 		nc $hostname $port 
 		echo
 		;;
-	"DNS Server Check-List")
-		echo "Please enter the IP/FQDN you want to check:" #asks again for IP/FQDN
-		read dns
-		dig $dns ANY +noall +answer   #Viewing all DNS records
- 		echo -n "Enter the record you want to check:"
-		read record 
-		echo
-		echo "Checking DNS Server hostname.bind Map Hostname Disclosure:"
-		nslookup -q=txt -class=CHAOS hostname.bind $record  #dig $record hostname.bind chaos txt
-		echo
-		echo "Checking DNS Server BIND version Directive Remote Version Disclosure:"
-		nslookup -q=txt -class=CHAOS version.bind $record
-		echo
-		read -p "Do you want to check DNS Transfer Zone $dnszone [yn]" answer 	#Check if you want to perform DNS transfer zone yes or no
-		if [[ $answer = y ]];
-			then	
-				dig axfr $record $dns 
-		fi
-		echo
-			;;
 	"WAF detection")
 		echo "Check if the targeted hosts are protected by a WAF:"
 		echo
