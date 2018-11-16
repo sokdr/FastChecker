@@ -15,10 +15,6 @@ With the usage of the Nmap script engine, hping3, sslscan tool and wafw00f the s
 	<li>Check webserver information</li>
 	<li>Check Strict-Transport-Security</li>
 	<li>Banner grabbing</li>
-	<li>Viewing all DNS records</li>
-	<li>Check DNS Server hostname.bind Map Hostname Disclosure</li>
-	<li>Check DNS Server BIND version Directive Remote Version Disclosure</li>
-	<li>Check DNS Transfer Zone</li>
 	<li>WAF detection</li>
 </ul>
 
