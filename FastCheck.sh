@@ -2,7 +2,7 @@
 echo "####################################################################################"
 echo "####################################################################################"
 echo "######################## ############################# #############################"
-echo "--------------------------------FastChecker v1.0.0:---------------------------------"
+echo "--------------------------------FastChecker v1.0.1:---------------------------------"
 echo
 echo "Nmap [https://nmap.org]  should be isntalled in your linux machine, if not open terminal and type 'sudo apt-get install nmap'"
 echo "waf00f also should be installed on your linux machine, if not then type 'pip install wafw00f' to install it "
@@ -10,7 +10,7 @@ echo "With waf00f pls use FQDN for better resutls:"
 echo "Also the script makes use of hping3 and sslscan tools:"
 echo "####################################################################################"
 echo
-echo "Dear ##$HOSTNAME## Welcome to the Fast Vulnerability Checker Script v1.0.0:"
+echo "Dear ##$HOSTNAME## Welcome to the Fast Vulnerability Checker Script v1.0.1:"
 echo "======================================================="
 echo "I provide you with your public IP address:"
 curl -s http://checkip.dyndns.org/ | grep -o "[[:digit:].]\+"
