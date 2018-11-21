@@ -1,7 +1,7 @@
 # FastChecker
-Bash script to identify fast the security level of networks and web applications against well known vulnerabilities.
+<h4>Bash script to identify fast the security level of networks and web applications against well known vulnerabilities.</h4>
 
-With the usage of the Nmap script engine, hping3, sslscan tool and wafw00f the script performs the following checks:
+<p>With the usage of the Nmap script engine, hping3, sslscan tool and wafw00f the script performs the following checks:</p>
 
 <ul>
   <li>Check for Poodle vulnerability</li>
