@@ -1,8 +1,18 @@
 #!/bin/bash
-echo "####################################################################################"
-echo "####################################################################################"
+tput clear
+trap ctrl_c INT
+
+function ctrl_c() {
+        echo "**You pressed Ctrl+C...Exiting"
+	exit 0;
+}
+#
+echo "#################### ############################## ###############################"
+echo "####################### ############################# ##############################"
 echo "######################## ############################# #############################"
 echo "--------------------------------FastChecker v1.0.1:---------------------------------"
+echo
+echo "Written by sokdr"
 echo
 echo "Nmap [https://nmap.org]  should be isntalled in your linux machine, if not open terminal and type 'sudo apt-get install nmap'"
 echo "waf00f also should be installed on your linux machine, if not then type 'pip install wafw00f' to install it "
@@ -10,7 +20,7 @@ echo "With waf00f pls use FQDN for better resutls:"
 echo "Also the script makes use of hping3 and sslscan tools:"
 echo "####################################################################################"
 echo
-echo "Dear ##$HOSTNAME## Welcome to the Fast Vulnerability Checker Script v1.0.1:"
+echo "Dear ##$HOSTNAME## Welcome to the Fast VUlnerability Checker v1.0.1:"
 echo "======================================================="
 echo "I provide you with your public IP address:"
 curl -s http://checkip.dyndns.org/ | grep -o "[[:digit:].]\+"
@@ -29,9 +39,9 @@ else
 fi
 echo
 echo "Here is the list of vulnerabilities and checks you want to search:"
-echo 
+echo
 PS3='Please enter your choice: '
-options=("Poodle check" "Heartbleed check" "SSL/TLS check" "ftp-anon" "Shellshock check" "Slowloris check" "HTTP-Methods" "TCP timestamp" "WebServer Information" "Strict-Transport-Security" "Banner grabbing" "WAF detection" "Quit")
+options=("Poodle check" "Heartbleed check" "SSL/TLS check" "ftp-anon" "Shellshock check" "Slowloris check" "HTTP-Methods" "TCP timestamp" "WebServer Information" "Strict-Transport-Security" "Banner grabbing" "WAF detection" "Check DoS attack" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -39,23 +49,23 @@ do
 		echo "Searching for Poodle vulnerability:"
 		echo
 		echo "Poodle scanner start to check hosts:"
-		nmap -sS -sV --version-light --script ssl-poodle -p 443 $hostname 
+		nmap -sS -sV --version-light --script ssl-poodle -p 443 $hostname
 		echo
             ;;
         "Heartbleed check")
 		echo "Searching for Heartbleed vulnerability:"
 		echo
 		echo "Now starting Heartbleed check:"
-		nmap -p 443 --script ssl-heartbleed $hostname 
+		nmap -p 443 --script ssl-heartbleed $hostname
 		echo
             ;;
         "SSL/TLS check")
         read -p "Please choose between Nmap or SSLscan $program [nmap sslscan]:" answer #choose nmap or sslscan
 		if [[ $answer = nmap ]]; then
-				nmap -sS --script ssl-enum-ciphers -p 443 $hostname 
+				nmap -sS --script ssl-enum-ciphers -p 443 $hostname
 				echo
        elif [[ $answer = sslscan ]]; then
-				sslscan --no-failed $hostname  
+				sslscan --no-failed $hostname
 				echo
 		else echo "wrong try again-:-"
 		fi
@@ -64,25 +74,25 @@ do
 	"ftp-anon")
 		echo "check for anonymous FTP connections:"
 		echo
-		nmap -sV -sC -p21 $hostname 
+		nmap -sV -sC -p21 $hostname
 		echo
 	    ;;
 	"Shellshock check")
 		echo "check for Shellshock Vulnerability:"
 		echo
-		nmap -sV -p- --script http-shellshock $hostname 
+		nmap -sV -p- --script http-shellshock $hostname
 		echo
 	    ;;
 	"Slowloris check")
 		echo "check for Slowloris Vulnerability:"
 		echo
-		nmap --script http-slowloris-check $hostname 
+		nmap --script http-slowloris-check $hostname
 		echo
 	    ;;
 	"HTTP-Methods")
 		echo "Check HTTP methods:"
 		echo
-		nmap -sS -Pn -p 80,443 -script http-methods $hostname 
+		nmap -sS -Pn -p 80,443 -script http-methods $hostname
 		echo
 		;;
     "TCP timestamp")
@@ -94,13 +104,13 @@ do
 	"WebServer Information")
 		echo "Checking webserver information:"
 		echo
-		curl -I -L $hostname 
+		curl -I -L $hostname
 		echo
 		;;
 	"Strict-Transport-Security")
 		echo "Checking Strict-Transport-Security:"
 		echo
-		curl -si $hostname | grep "Strict" 
+		curl -si $hostname | grep "Strict"
 		echo
 		;;
 	"Banner grabbing")
@@ -108,7 +118,7 @@ do
 		echo -n "Enter the port you want to check:"
 		read port
 		echo
-		nc $hostname $port 
+		nc $hostname $port
 		echo
 		;;
 	"WAF detection")
@@ -123,10 +133,19 @@ do
 		fi
 		echo
 	    ;;
-        "Quit")
+	"Check DoS attack")
+		echo "Check the $hostname if it is vulnerable to DoS attacks:" 	
+		echo
+		echo -n "Enter the port you want to check:"
+		read port
+		#nmap -v --script dos
+		echo
+		nmap --script dos -Pn $hostname $port 
+     "Quit")
             break
             ;;
         *) echo invalid option;;
     esac
 done
+
 
