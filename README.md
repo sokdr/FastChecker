@@ -16,6 +16,7 @@ With the usage of the Nmap script engine, hping3, sslscan tool and wafw00f the s
 	<li>Check Strict-Transport-Security</li>
 	<li>Banner grabbing</li>
 	<li>WAF detection</li>
+	<li>Check DoS attack</li>
 </ul>
 
 
